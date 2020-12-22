@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
@@ -12,7 +13,7 @@ class Chart extends StatelessWidget {
   List<Map<String, Object>> get groupedTransactionsValues {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(
-        Duration(days: index),
+        Duration(days: 6 - index),
       );
       double dailyAmmount = 0.0;
 
