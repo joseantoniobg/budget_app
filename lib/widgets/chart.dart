@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
@@ -28,7 +27,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': dailyAmmount
       };
-    });
+    }) /*.reversed.toList()*/;
   }
 
   double get totalExpenses {
@@ -54,7 +53,7 @@ class Chart extends StatelessWidget {
                       height: 30,
                       child: Card(
                         child: Text(
-                          'No Transactions Yet...',
+                          'No Transactions in this Week Yet...',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
