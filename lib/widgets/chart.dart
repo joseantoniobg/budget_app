@@ -38,14 +38,14 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-        elevation: 6,
-        margin: EdgeInsets.all(15),
-        child: Container(
-          padding: EdgeInsets.all(5),
-          margin: EdgeInsets.all(5),
-          child: Row(
+    return Card(
+      elevation: 6,
+      margin: EdgeInsets.all(15),
+      child: Container(
+        padding: EdgeInsets.all(5),
+        margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+        child: Column(children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: (recentTransactions.length == 0
                 ? [
@@ -67,7 +67,26 @@ class Chart extends StatelessWidget {
                     );
                   }).toList()),
           ),
-        ),
+          totalExpenses == 0
+              ? SizedBox(
+                  height: 10,
+                )
+              : Container(
+                  height: 50,
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                        totalExpenses == 0
+                            ? ''
+                            : 'Total Week amount: R\$ ${totalExpenses.toStringAsFixed(2)}',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans')),
+                  ),
+                )
+        ]),
       ),
     );
   }
