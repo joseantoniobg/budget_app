@@ -52,9 +52,11 @@ class Chart extends StatelessWidget {
                     Container(
                       height: 30,
                       child: Card(
-                        child: Text(
-                          'No Transactions in this Week Yet...',
-                          style: TextStyle(fontSize: 20),
+                        child: FittedBox(
+                          child: Text(
+                            'No Transactions in this Week Yet...',
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
                       ),
                     ),
@@ -71,19 +73,21 @@ class Chart extends StatelessWidget {
               ? SizedBox(
                   height: 10,
                 )
-              : Container(
-                  height: 50,
-                  child: Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Text(
-                        totalExpenses == 0
-                            ? ''
-                            : 'Total Week amount: R\$ ${totalExpenses.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans')),
+              : FittedBox(
+                  child: Container(
+                    height: 50,
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Text(
+                          totalExpenses == 0
+                              ? ''
+                              : 'Total Week amount: R\$ ${totalExpenses.toStringAsFixed(2)}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans')),
+                    ),
                   ),
                 )
         ]),

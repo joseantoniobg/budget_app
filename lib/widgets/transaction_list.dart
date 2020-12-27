@@ -12,26 +12,28 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.length == 0
-        ? Column(
-            children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Nothing here yet...',
-                style: Theme.of(context).textTheme.title,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ))
-            ],
-          )
+        ? LayoutBuilder(builder: (ctx, constraints) {
+            return Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Nothing here yet...',
+                  style: Theme.of(context).textTheme.title,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                    height: constraints.maxHeight * .6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    ))
+              ],
+            );
+          })
         : ListView.builder(
             itemBuilder: (ctx, index) {
               return Card(
@@ -54,11 +56,25 @@ class TransactionList extends StatelessWidget {
                   ),
                   subtitle: Text(DateFormat('dd/MM/yyyy')
                       .format(transactions[index].date)),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    color: Theme.of(context).errorColor,
-                    onPressed: () => _deleteTx(transactions[index].id),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? FlatButton.icon(
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).errorColor,
+                          ),
+                          label: Text(
+                            'Delete',
+                            style: TextStyle(
+                              color: Theme.of(context).errorColor,
+                            ),
+                          ),
+                          onPressed: () => _deleteTx(transactions[index].id),
+                        )
+                      : IconButton(
+                          icon: Icon(Icons.delete),
+                          color: Theme.of(context).errorColor,
+                          onPressed: () => _deleteTx(transactions[index].id),
+                        ),
                 ),
               );
               // return Container(
